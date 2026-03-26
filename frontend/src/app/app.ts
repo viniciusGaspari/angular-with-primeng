@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   private themeService = inject(ThemeService);
 
   ngOnInit(): void {
-    this.themeService.toggleTheme();
+    this.themeService.isDark();
   }
 
 

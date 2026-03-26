@@ -7,6 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MyDialogService } from '../../../services/dialog/my.dialog.service';
 
 @Component({
   selector: 'app-register.component',
@@ -16,6 +17,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegisterComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
+  private myDialogService = inject(MyDialogService);
 
   formGroup!: FormGroup
 
@@ -27,6 +29,7 @@ export class RegisterComponent implements OnInit {
     })
   }
   onSubmit(): void {
-
-  }
+    this.myDialogService.showLoading();
+    this.myDialogService.onCloseDialog(); 
+  } 
 }

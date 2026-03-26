@@ -7,10 +7,10 @@ export class MyDialogService {
     
     private dialogService = inject(DialogService);
     
-dialogRef: DynamicDialogRef<any> | undefined | null;
+    dialogRef: DynamicDialogRef<any> | undefined | null;
+    
     showLoading(): void {
         this.dialogRef = this.dialogService.open(DialogLoadingComponent, {
-            modal: true,
             closable: false,
             showHeader: false,
             dismissableMask: false,
