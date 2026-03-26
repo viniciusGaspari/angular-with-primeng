@@ -44,7 +44,7 @@ public class JwtCookieFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             } catch (Exception e) {
-
+                SecurityContextHolder.clearContext();
             }
         }
 
