@@ -26,6 +26,12 @@ color: #f87171;
 font-size: 14px;
 }
 
+.loading-dialog-custom {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
 body {
   --bg-primary: #0f172a;
   --text-primary: #ffffff;

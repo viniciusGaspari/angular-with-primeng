@@ -7,6 +7,8 @@ import { routes } from './app.routes';
 import player from 'lottie-web';
 import { provideHttpClient, withXsrfConfiguration, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { authInterceptor } from './services/auth/auth.interceptor';
+import { MyDialogService } from './services/dialog/my.dialog.service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +26,7 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
+    DialogService,
     provideHttpClient(
       withInterceptors([authInterceptor]),
       withInterceptorsFromDi(),

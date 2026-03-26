@@ -7,6 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MyDialogService } from '../../../services/dialog/my.dialog.service';
 import { LoginAuthenticationService } from '../../../services/auth/login.authentication';
 
 @Component({
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
   private loginAuthenticationService = inject(LoginAuthenticationService);
+  private loadingServiceDialog = inject(MyDialogService);
 
   formGroup!: FormGroup
 
@@ -30,11 +32,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void{
+    this.loadingServiceDialog.showLoading();
     this.loginAuthenticationService
       .logIn({username: this.formGroup.value.email, password: this.formGroup.value.password})
       .subscribe({
         next: () => {
           console.log(`Deu certo`)
+          this.loadingServiceDialog.onCloseDialog();
+        },  
+        error: (err) => {
+          console.log(`Deu certo`)
+          this.loadingServiceDialog.onCloseDialog();
         }
       })
   }
