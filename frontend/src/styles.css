@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #a855f7;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.router-link-button {
+    background: transparent;
+}
+
+.invalid-input {
+color: #f87171;
+font-size: 14px;
+}
+
+body {
+  --bg-primary: #0f172a;
+  --text-primary: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode {
+  --bg-primary: #f8fafc;
+  --text-primary: #1e293b;
+}
+
+
+::ng-deep .p-password-toggle-mask-icon {
+    cursor: pointer !important;
+}
+
+.container {
+  background-color: var(--bg-primary);
+}
+
+
+h1,p,span {
+  color: var(--text-primary);
+}

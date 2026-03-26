@@ -1,0 +1,73 @@
+<form class="form" (submit)="onSubmit()" [formGroup]="formGroup" >
+  <div class="sub-form">
+    <div class="header-text">
+      <h1>Crie sua conta</h1>
+      <p>Comece a sincronizar seus dados em segundos.</p>
+    </div>
+    
+    <p-inputgroup class="username-group">
+        <p-inputgroup-addon>
+            <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="in">
+            <input pInputText type="text" formControlName="username" id="on_label_user">
+            <label for="on_label_user">Seu primeiro nome</label>
+        </p-floatlabel>
+    </p-inputgroup>
+
+    @if (formGroup.get('username')?.invalid && (formGroup.get('username')?.dirty) || formGroup.get('username')?.touched) {
+        @if (formGroup.get("username")?.hasError("required")) {
+            <span class="invalid-input">Seu primeiro nome é obrigatório</span>
+        }
+    }
+
+    <p-inputGroup class="email-group">
+      <p-inputgroup-addon>
+        <i class="pi pi-envelope"></i>
+      </p-inputgroup-addon>
+      <p-floatlabel variant="in">
+        <input formControlName="email" pInputText id="on_label_email" type="email" />
+        <label for="on_label_email">Seu e-mail profissional</label>
+      </p-floatlabel>
+          <small>
+    </small>
+    </p-inputGroup>
+    @if (formGroup.get('email')?.invalid && (formGroup.get('email')?.dirty || formGroup.get('email')?.touched)) {
+        @if (formGroup.get('email')?.hasError('required')) {
+        <span class="invalid-input">O e-mail é obrigatório.</span>
+        } @else if (formGroup.get('email')?.hasError('email')) {
+        <span class="invalid-input">Por favor, insira um e-mail válido.</span>
+        }
+    }
+    <p-inputgroup class="password-group">
+      <p-inputgroup-addon>
+        <i class="pi pi-lock"></i>
+      </p-inputgroup-addon>
+      <p-floatlabel variant="in">
+        <p-password
+        formControlName="password"
+          type="password"
+          [toggleMask]="true"
+          weakLabel="Senha fraca"
+          mediumLabel="Senha média"
+          strongLabel="Senha forte"
+          label="in_label_password"
+        ></p-password>
+        <label for="in_label_password">Sua senha secreta</label>
+      </p-floatlabel>
+    </p-inputgroup>
+
+    @if (formGroup.get('password')?.invalid && (formGroup.get('password')?.dirty || formGroup.get('password')?.touched)) {
+       @if(formGroup.get('password')?.hasError('required')){
+            <span class="invalid-input">Senha é obrigatório</span>
+        } @else if (formGroup.get('password')?.hasError('minlength')) {
+            <span class="invalid-input">A senha deve ter no mínimo 6 caracteres</span>
+        }
+    }
+
+    <div class="submit-group">
+      <p-button class="submit-button" type="submit" [disabled]="formGroup.invalid" label="Criar conta"></p-button>
+      <span>Já tem uma conta? <a class="router-link-button" routerLink="/login" >Entrar aqui</a></span>
+    </div>
+  </div>
+</form>
