@@ -26,13 +26,7 @@ export class HomeAuthComponent implements OnInit {
   private themeService = inject(ThemeService);
 
 
-get isDarkMode(): boolean {
-    return this.themeService.isDark();
-  }
 
-  onDarkMode(): void {
-    this.themeService.toggleTheme();
-  }
 
   ngOnInit(): void {
 

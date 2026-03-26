@@ -7,7 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { LoginAuthenticationService } from '../../../services/auth/login.authentication';
 
 @Component({
   selector: 'app-login.component',
@@ -18,6 +18,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent implements OnInit {
 
   private formBuilder = inject(FormBuilder);
+  private loginAuthenticationService = inject(LoginAuthenticationService);
 
   formGroup!: FormGroup
 
@@ -29,7 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void{
-
+    this.loginAuthenticationService
+      .logIn({username: this.formGroup.value.email, password: this.formGroup.value.password})
+      .subscribe({
+        next: () => {
+          console.log(`Deu certo`)
+        }
+      })
   }
 
 }

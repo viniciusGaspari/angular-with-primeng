@@ -1,0 +1,33 @@
+<header class="header-container">
+  <div class="header-content">
+    <div class="logo" routerLink="/">
+      <i class="pi pi-sync logo-icon"></i>
+      <span>MultiSync</span>
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="/features" routerLinkActive="active">Recursos</a>
+      <a routerLink="/about" routerLinkActive="active">Sobre</a>
+      <a href="https://github.com/viniciusGaspari" target="_blank">Github</a>
+    </nav>
+
+    <div class="header-actions">
+      <a routerLink="/login" class="btn-text">Entrar</a>
+
+      <p-button
+        label="Começar agora"
+        routerLink="/register"
+        styleClass="p-button-rounded btn-header-gradient"
+      ></p-button>
+
+      <p-avatar icon="pi pi-user" shape="circle" styleClass="avatar-user"></p-avatar>
+
+      <p-button
+        [icon]="isDarkMode ? 'pi pi-moon' : 'pi pi-sun'"
+        styleClass="p-button-rounded p-button-text dark-mode-toggle"
+        (onClick)="onDarkMode()"
+      >
+      </p-button>
+    </div>
+  </div>
+</header>

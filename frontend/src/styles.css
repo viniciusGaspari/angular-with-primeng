@@ -38,8 +38,8 @@ body.light-mode {
 }
 
 
-::ng-deep .p-password-toggle-mask-icon {
-    cursor: pointer !important;
+::ng-deep .p-password-toggle-mask-icon:hover {
+    cursor: pointer;
 }
 
 .container {
@@ -47,6 +47,6 @@ body.light-mode {
 }
 
 
-h1,p,span {
+h1,p,span,header {
   color: var(--text-primary);
 }
