@@ -8,10 +8,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+
 @RequiredArgsConstructor
 public class JwtCookieFilter extends OncePerRequestFilter {
 
@@ -35,10 +40,11 @@ public class JwtCookieFilter extends OncePerRequestFilter {
         if (token != null) {
             try {
                 String username = jwtService.extractUsername(token);
-
+                String role = jwtService.extractRole(token);
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            username, null, null
+                            username, null, Collections.singletonList(authority)
                     );
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);

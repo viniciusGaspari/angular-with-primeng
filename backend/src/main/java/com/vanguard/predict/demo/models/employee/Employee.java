@@ -1,5 +1,6 @@
-package com.vanguard.predict.demo.models.company;
+package com.vanguard.predict.demo.models.employee;
 
+import com.vanguard.predict.demo.models.company.Company;
 import com.vanguard.predict.demo.models.roles.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,29 +11,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Data
-@EntityListeners({AuditingEntityListener.class})
-@Table(name = "companies")
-public class Company {
+@Table(name = "employees")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_id")
-    private Integer id;
+    @Column(name = "employee_id")
+    private Integer employeeId;
 
-    @Column(name = "company_cnpj", unique = true, length = 14)
-    private Integer companyCnpj;
+    @Column(name = "employee_name")
+    private String employeeName;
 
-    @Column(name = "company_email", nullable = false, unique = true)
-    private String companyEmail;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
-    @Column(name = "company_name", nullable = false)
-    private String companyName;
-
-    @Column(name = "company_password", nullable = false)
-    private String companyPassword;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 

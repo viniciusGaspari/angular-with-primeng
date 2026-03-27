@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.controllers;
+package com.vanguard.predict.demo.auth;
 
 import com.vanguard.predict.demo.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +10,8 @@ public class ResponseCookieBuilder {
 
     private final JwtService jwtService;
 
-     public ResponseCookie responseCookieBuilderWhenLogin(String subject){
-        String token = jwtService.generateToken(subject);
+     public ResponseCookie responseCookieBuilderWhenLogin(String subject, String roleName){
+        String token = jwtService.generateToken(subject, roleName);
 
         return ResponseCookie.from("accessToken", token)
                 .httpOnly(true)

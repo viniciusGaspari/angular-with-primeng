@@ -1,6 +1,8 @@
 package com.vanguard.predict.demo.controllers;
 
+import com.vanguard.predict.demo.auth.ResponseCookieBuilder;
 import com.vanguard.predict.demo.mapper.company.CompanyMapper;
+import com.vanguard.predict.demo.models.company.Company;
 import com.vanguard.predict.demo.models.company.CompanyLoginRequest;
 import com.vanguard.predict.demo.models.company.CompanyRegisterRequest;
 import com.vanguard.predict.demo.services.CompanyService;
@@ -25,17 +27,25 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody CompanyLoginRequest login) {
-            this.companyService.logIn(this.companyMapper.LoginRequestToEntity(login));
+        this.companyService.logIn(this.companyMapper.LoginRequestToEntity(login));
+
+        String cookie = this.responseCookieBuilder
+                .responseCookieBuilderWhenLogin(
+                        String.valueOf(login.getCompanyCnpj()),
+                        login.getRole().getRoleName()
+                ).toString();
+
             return ResponseEntity
                     .status(200)
-                    .header(HttpHeaders.SET_COOKIE, this.responseCookieBuilder.responseCookieBuilderWhenLogin(String.valueOf(login.getCompanyCnpj())).toString())
+                    .header(HttpHeaders.SET_COOKIE, cookie)
                     .build();
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody CompanyRegisterRequest register){
+        Company newCompany = this.companyService.register(this.companyMapper.RegisterRequestToEntity(register));
         return ResponseEntity
-                .created(uriLocationBuilder(this.companyService.register(this.companyMapper.RegisterRequestToEntity(register)).getId()))
+                .created(uriLocationBuilder(newCompany.getId()))
                 .build();
     }
 
