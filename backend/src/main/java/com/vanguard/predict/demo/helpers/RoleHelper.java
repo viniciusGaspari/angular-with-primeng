@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.validators;
+package com.vanguard.predict.demo.helpers;
 
 import com.vanguard.predict.demo.exceptions.MyRuntimeException;
 import com.vanguard.predict.demo.models.roles.Role;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RoleValidator {
+public class RoleHelper {
 
     private final BaseRepository<Role, Integer> baseRepository;
 

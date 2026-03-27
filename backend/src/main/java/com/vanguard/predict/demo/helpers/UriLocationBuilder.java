@@ -1,10 +1,10 @@
-package com.vanguard.predict.demo.controllers;
+package com.vanguard.predict.demo.helpers;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-public class UriLocation {
+public class UriLocationBuilder {
     static public URI uriLocationBuilder(Integer id){
         return ServletUriComponentsBuilder
                 .fromCurrentRequest()

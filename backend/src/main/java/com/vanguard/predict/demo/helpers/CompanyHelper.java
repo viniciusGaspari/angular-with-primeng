@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.validators;
+package com.vanguard.predict.demo.helpers;
 
 import com.vanguard.predict.demo.exceptions.MyRuntimeException;
 import com.vanguard.predict.demo.models.company.Company;
@@ -9,24 +9,12 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class CompanyValidator {
+public class CompanyHelper {
 
     private final CompanyRepository companyRepository;
     private final BaseRepository<Company, Integer> baseRepository;
 
-    public String existingCompanyByEmail(String companyEmail) {
-        if(this.companyRepository.existsByCompanyEmail(companyEmail)){
-            throw new MyRuntimeException("Email já cadastrado", 403);
-        }
-        return companyEmail;
-    }
 
-    public Integer existingCompanyByCnpj(Integer companyCnpj){
-        if(this.companyRepository.existsByCompanyCnpj(companyCnpj)){
-            throw new MyRuntimeException("CNPJ já cadastrado", 403);
-        }
-        return companyCnpj;
-    }
 
     public Company findCompanyByCnpj(Integer companyCnpj){
         return this.companyRepository.findByCompanyCnpj(companyCnpj)

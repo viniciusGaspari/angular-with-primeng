@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.validators;
+package com.vanguard.predict.demo.helpers;
 
 import com.vanguard.predict.demo.exceptions.MyRuntimeException;
 import lombok.RequiredArgsConstructor;
@@ -7,17 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BcryptValidator {
+public class BcryptHelper {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void isPasswordMatches(String rawPassword, String passwordSaved){
-        if(!bCryptPasswordEncoder.matches(rawPassword, passwordSaved)){
-            throw new MyRuntimeException("Senha incorreta", 401);
-        }
-    }
 
-    public String encodePassword(String newPassword){
+
+    public String encodeNewPassword(String newPassword){
         return this.bCryptPasswordEncoder.encode(newPassword);
     }
 

@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.auth;
+package com.vanguard.predict.demo.helpers;
 
 import com.vanguard.predict.demo.jwt.JwtService;
 import lombok.RequiredArgsConstructor;

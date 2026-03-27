@@ -1,6 +1,6 @@
 package com.vanguard.predict.demo.controllers;
 
-import com.vanguard.predict.demo.auth.ResponseCookieBuilder;
+import com.vanguard.predict.demo.helpers.ResponseCookieBuilder;
 import com.vanguard.predict.demo.mapper.company.CompanyMapper;
 import com.vanguard.predict.demo.models.company.Company;
 import com.vanguard.predict.demo.models.company.CompanyLoginRequest;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.vanguard.predict.demo.controllers.UriLocation.uriLocationBuilder;
+import static com.vanguard.predict.demo.helpers.UriLocationBuilder.uriLocationBuilder;
 
 @RestController
 @RequestMapping("/api/auth")

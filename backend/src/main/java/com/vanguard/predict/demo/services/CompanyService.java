@@ -1,11 +1,11 @@
 package com.vanguard.predict.demo.services;
 
-import com.vanguard.predict.demo.exceptions.MyRuntimeException;
 import com.vanguard.predict.demo.models.company.Company;
-import com.vanguard.predict.demo.repositories.base.BaseRepository;
-import com.vanguard.predict.demo.validators.BcryptValidator;
-import com.vanguard.predict.demo.validators.CompanyValidator;
-import com.vanguard.predict.demo.validators.RoleValidator;
+import com.vanguard.predict.demo.helpers.BcryptHelper;
+import com.vanguard.predict.demo.helpers.CompanyHelper;
+import com.vanguard.predict.demo.helpers.RoleHelper;
+import com.vanguard.predict.demo.validator.BcryptValidator;
+import com.vanguard.predict.demo.validator.CompanyValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +13,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompanyService {
 
+    private final CompanyHelper companyHelper;
     private final CompanyValidator companyValidator;
-    private final RoleValidator roleValidator;
     private final BcryptValidator bcryptValidator;
 
-    public Company register(Company request) {
-        request.setRole(this.roleValidator.getRoleById(request.getRole().getRoleId()));
-        request.setCompanyPassword(this.bcryptValidator.encodePassword(request.getCompanyPassword()));
-        request.setCompanyEmail(this.companyValidator.existingCompanyByEmail(request.getCompanyEmail()));
-        request.setCompanyCnpj(this.companyValidator.existingCompanyByCnpj(request.getCompanyCnpj()));
-        return this.companyValidator.saveCompany(request);
+    private final RoleHelper roleHelper;
+    private final BcryptHelper bcryptHelper;
+
+    public Company register(Company companyRequest) {
+        this.companyValidator.existingCompanyByCnpj(companyRequest.getCompanyCnpj());
+        this.companyValidator.existingCompanyByEmail(companyRequest.getCompanyEmail());
+
+        companyRequest.setRole(this.roleHelper.getRoleById(companyRequest.getRole().getRoleId()));
+        companyRequest.setCompanyPassword(this.bcryptHelper.encodeNewPassword(companyRequest.getCompanyPassword()));
+
+        return this.companyHelper.saveCompany(companyRequest);
     }
 
-    public void logIn(Company request){
+    public void logIn(Company companyRequest){
+        this.companyValidator.existingCompanyByCnpj(companyRequest.getCompanyCnpj());
         this.bcryptValidator
                 .isPasswordMatches(
-                        request.getCompanyPassword(),
-                        this.companyValidator.findCompanyByCnpj(request.getCompanyCnpj()).getCompanyPassword()
+                        companyRequest.getCompanyPassword(),
+                        this.companyHelper.findCompanyByCnpj(companyRequest.getCompanyCnpj()).getCompanyPassword()
                 );
     }
 
