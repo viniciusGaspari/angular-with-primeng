@@ -1,5 +1,6 @@
 package com.vanguard.predict.demo.models.company;
 
+import com.vanguard.predict.demo.models.permissions.Permission;
 import com.vanguard.predict.demo.models.roles.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,9 +33,13 @@ public class Company {
     @Column(name = "company_password", nullable = false)
     private String companyPassword;
 
-    @OneToOne
-    @JoinColumn(name = "role_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private Role role;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "permissions_id", insertable = false, updatable = false)
+    private Permission permission;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)

@@ -24,7 +24,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/api/auth/**")
@@ -37,9 +37,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JwtCookieFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(
+                        new JwtCookieFilter(jwtService), UsernamePasswordAuthenticationFilter.class
+                )
+                .build();
 
-        return http.build();
     }
 
     @Bean

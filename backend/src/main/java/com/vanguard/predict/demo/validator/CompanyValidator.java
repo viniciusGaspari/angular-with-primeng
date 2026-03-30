@@ -14,12 +14,12 @@ public class CompanyValidator {
 
     public void existingCompanyByEmail(String companyEmail) {
         companyRepository.existsByCompanyEmail(companyEmail)
-                .orElseThrow(() -> new MyRuntimeException("Email já cadastrado", 403));
+                .orElseThrow(() -> new MyRuntimeException("Email já cadastrado", 422));
     }
 
     public void existingCompanyByCnpj(Integer companyCnpj){
         this.companyRepository.existsByCompanyCnpj(companyCnpj)
-                .orElseThrow(() -> new MyRuntimeException("CNPJ já cadastrado", 403));
+                .orElseThrow(() -> new MyRuntimeException("CNPJ já cadastrado", 422));
     }
 
 

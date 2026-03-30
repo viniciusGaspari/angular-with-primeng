@@ -1,4 +1,4 @@
-package com.vanguard.predict.demo.services;
+package com.vanguard.predict.demo.services.company;
 
 import com.vanguard.predict.demo.models.company.Company;
 import com.vanguard.predict.demo.helpers.BcryptHelper;

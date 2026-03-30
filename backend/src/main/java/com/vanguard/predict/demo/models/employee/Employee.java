@@ -21,8 +21,14 @@ public class Employee {
     @Column(name = "employee_id")
     private Integer employeeId;
 
+    @Column(name = "employee_cpf")
+    private Integer employeeCpf;
+
     @Column(name = "employee_name")
     private String employeeName;
+
+    @Column(name = "employee_password")
+    private String employeePassword;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

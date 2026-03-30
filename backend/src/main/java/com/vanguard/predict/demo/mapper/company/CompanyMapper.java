@@ -18,7 +18,6 @@ public class CompanyMapper {
     }
     public Company LoginRequestToEntity(CompanyLoginRequest model){
         Company company = new Company();
-        company.setCompanyCnpj(model.getCompanyCnpj());
         company.setCompanyPassword(model.getCompanyPassword());
         return company;
     }
